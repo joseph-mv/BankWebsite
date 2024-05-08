@@ -1,25 +1,41 @@
 var express = require('express');
 var router = express.Router();
 var userHelper = require('../Helpers/user-helpers');
+var jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
+// get config vars
+dotenv.config();
 
-//   if (token == null) return res.sendStatus(401);
+// access config var
+process.env.TOKEN_SECRET;
 
-//   jwt.verify(token, 'your_secret_key', (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// }
+function generateAccessToken(username) {
+  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
+
+function verifyToken(req, res, next) {
+  
+  const token = req.headers['authorization']
+
+  if (!token) return res.status(401).json({ error: 'Access denied' });
+  try {
+    console.log(token);
+   const decoded = jwt.verify(token,process.env.TOKEN_SECRET );
+   req.userId = decoded.userId;
+   next();
+   } catch (error) {
+   res.status(401).json({ error: 'Invalid token' });
+   }
+   };
+
+
 
 
 
 router.post('/register', async (req, res) => {
 
-  const { name, address, mobileNumber, email, password } = req.body;
+  
   try {
   userHelper.register(req.body).then((user) => {
     console.log(user)
@@ -39,26 +55,33 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login',(req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   userHelper.login(req.body).then((response) => {
-  console.log(response)
+  // console.log(response)
     if(response.status){
-      req.session.userName=response.userName
-      req.session.userLoggedIn=true
-      req.session.userId=response.userId
-   
-      res.status(201).json({status:true});
-
+      
+    
+      const token = generateAccessToken({ username: req.body.email });
+      
+      
+      res.status(201).json({status:true,token});
+      console.log(token)
+  
+     
 
     }
     else{
-      req.session.loggedError='Invalid Email or Password'
+      
       // console.log(req.session)
-      res.status(201).json({status:false,loggedError:req.session.loggedError});
+      res.status(201).json({status:false,loggedError:'Invalid Email or Password'});
       
      
     }
   })
+});
+
+router.get("/account" ,verifyToken,(req,res)=>{
+  console.log("hii")
 })
 
 module.exports = router;

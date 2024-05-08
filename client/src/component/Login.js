@@ -14,6 +14,7 @@ function Login() {
       // Handle successful login
       console.log(response.data);
       if(response.data.status){
+        localStorage.setItem('token', response.data.token);
         navigate('/dash-board');
       }
       else{

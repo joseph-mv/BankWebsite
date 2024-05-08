@@ -4,7 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db=require('./config/connection')
-var session = require('express-session')
+require('dotenv').config();
+
+const jwtSecret = process.env.JWT_SECRET;
+
+
+
 var app = express();
 db.connect((err)=>{
     if (err){console.log("connection error")}
@@ -12,17 +17,7 @@ db.connect((err)=>{
     console.log('connected successfully');
     
     });
-    app.use(session({
-        secret: 'cat running',
-        resave:true,
-        saveUninitialized: true,
-        cookie: {
-          maxAge: 14400000, // 4 hours in milliseconds
-          httpOnly: true,
-          secure: false // If using HTTPS
-        },
-      
-      }))
+    
 
 
   
