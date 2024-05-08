@@ -4,19 +4,34 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db=require('./config/connection')
-
+var session = require('express-session')
+var app = express();
 db.connect((err)=>{
     if (err){console.log("connection error")}
     else 
     console.log('connected successfully');
     
     });
+    app.use(session({
+        secret: 'cat running',
+        resave:true,
+        saveUninitialized: true,
+        cookie: {
+          maxAge: 14400000, // 4 hours in milliseconds
+          httpOnly: true,
+          secure: false // If using HTTPS
+        },
+      
+      }))
+
+
+  
 
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
 
-var app = express();
+
 app.use(cors());
 
 app.use(logger('dev'));

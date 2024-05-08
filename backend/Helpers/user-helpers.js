@@ -27,4 +27,25 @@ module.exports={
             }
         })
     },
+
+    login: (user) => {
+
+        return new promise(async (resolve, reject) => {
+            existingUser = await db.get().collection(collection.User_Collection).findOne({ email: user.email })
+            if (existingUser) {
+                if (await bcrypt.compare(user.password, existingUser.password)) {
+                    console.log('user logedin')
+                    // console.log(existingUser)
+                    resolve({ status: true, userName: existingUser.name, userId: existingUser._id })
+                }
+                else {
+                    resolve({ status: false })
+                }
+            }
+            else {
+                resolve({ status: false })
+            }
+        })
+
+    },
 }

@@ -31,14 +31,34 @@ router.post('/register', async (req, res) => {
       }
   })
  
-
   
-      
-     
   } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' }); // Handle errors appropriately
   }
 });
+
+router.post('/login',(req, res) => {
+  console.log(req.body)
+  userHelper.login(req.body).then((response) => {
+  console.log(response)
+    if(response.status){
+      req.session.userName=response.userName
+      req.session.userLoggedIn=true
+      req.session.userId=response.userId
+   
+      res.status(201).json({status:true});
+
+
+    }
+    else{
+      req.session.loggedError='Invalid Email or Password'
+      // console.log(req.session)
+      res.status(201).json({status:false,loggedError:req.session.loggedError});
+      
+     
+    }
+  })
+})
 
 module.exports = router;
