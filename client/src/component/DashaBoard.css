@@ -1,4 +1,4 @@
-.user-dashboard {
+.user-dashboard  {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,5 +24,26 @@
   
   .transaction-list li {
     margin-bottom: 5px;
+  }
+  p{
+    text-align: center;
+  }
+  table {
+    border-collapse: collapse; /* Remove borders between cells */
+    width: 100%; /* Optional: Set table width */
+  }
+  
+  th, td {
+    padding: 10px; /* Adjust padding for spacing */
+    border: 1px solid #ddd; /* Add table borders */
+  }
+  
+  th {
+    text-align: left; /* Align headers to the left */
+    font-weight: bold; /* Make headers bolder */
+  }
+  
+  .amount {
+    text-align: right; /* Align amounts to the right */
   }
   

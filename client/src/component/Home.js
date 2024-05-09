@@ -1,21 +1,19 @@
 import React from 'react'
 import './Home.css'
+import { useNavigate } from 'react-router-dom';
 function Home() {
+  const navigate = useNavigate();
   return (
     <div>
        <div className="xyz-bank">
-      <header className="header">
-        <img src="../public/logo.png" alt="" />
-        
-        <h1>XYZ Bank</h1>
-      </header>
+      
       <main className="main">
         <section className="hero">
           <h2>Your Financial Partner for a Brighter Future</h2>
           <p>Experience secure and convenient banking with XYZ Bank.</p>
           <div className="buttons">
-            <a href="/login" className="button login">Login</a>
-            <a href="/register" className="button register">Register</a>
+            <button onClick={()=>{navigate("/login")}} className="button login">Login</button>
+            <button onClick={()=>{navigate("/register")}} className="button register">Register</button>
           </div>
          
         </section>
