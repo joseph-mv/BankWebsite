@@ -9,6 +9,7 @@ import React from 'react';
 
 
 function App() {
+  
   return (
     <div>
        <Router>
@@ -18,7 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dash-board" element={<DashBoard />} />
+        <Route path="/dash-board" element={<DashBoard />}  />
       </Routes>
     </Router>
     </div>

@@ -4,6 +4,10 @@
     align-items: center;
     padding: 20px;
   }
+  .user-dashboard input{
+    max-width: 70%;
+    width: 150px;
+  }
   
   .error-message {
     color: red;

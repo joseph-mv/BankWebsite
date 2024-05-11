@@ -1,7 +1,9 @@
 import React from 'react'
 import './Home.css'
 import { useNavigate } from 'react-router-dom';
+
 function Home() {
+  const token=localStorage.getItem("token")
   const navigate = useNavigate();
   return (
     <div>
@@ -12,7 +14,7 @@ function Home() {
           <h2>Your Financial Partner for a Brighter Future</h2>
           <p>Experience secure and convenient banking with XYZ Bank.</p>
           <div className="buttons">
-            <button onClick={()=>{navigate("/login")}} className="button login">Login</button>
+            {token?<button onClick={()=>{navigate("/dash-board")}} className="button login">DashaBoard</button>:<button onClick={()=>{navigate("/login")}} className="button login">Login</button>}
             <button onClick={()=>{navigate("/register")}} className="button register">Register</button>
           </div>
          

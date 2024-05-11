@@ -130,7 +130,7 @@ module.exports = {
     return new promise((resolve,reject)=>{
         db.get().collection(collection.Transaction_Collection).findOne({userId:userId}).then((response)=>{
             
-            resolve(response.transcationHistory)
+            resolve(response.transcationHistory.reverse())
         })
     })
   }

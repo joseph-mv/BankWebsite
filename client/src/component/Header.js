@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ const Header = () => {
     setToken(""); 
     navigate("/login");
   };
+  
 
   return (
     <header className="header">
@@ -26,6 +27,7 @@ const Header = () => {
               <a href="#">About</a>
             </li>
           </ul>
+          
 
           {token ? (
             <button className="logout-btn" onClick={handleLogout}>

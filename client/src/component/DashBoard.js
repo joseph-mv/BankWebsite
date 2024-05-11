@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DashaBoard.css";
+import Tran from './Transactions'
+
+
+
+ 
+
 
 const UserDashboard = () => {
   const [balance, setBalance] = useState(0);
@@ -12,27 +18,37 @@ const UserDashboard = () => {
   const [click,setClick]=useState(false)
   const token = localStorage.getItem("token");
   const user_id=localStorage.getItem("user_Id");
-
+ 
 
   useEffect(() => {
+
+    
     axios.get("http://localhost:9000/account", {
       headers: {
         Authorization: token,
-        User:user_id,
+        User: user_id,
       },
-    }).then((response)=>{
-      
-      console.log(response.data.userDetails)
-      console.log(response.data.transactionsDetails)
-      
-      setUser(response.data.userDetails)
-      setBalance(response.data.userDetails.balance)
-      setTransactions(response.data.transactionsDetails)
     })
+  .then((response) => {
+      // console.log(response);
+      // console.log(response.data.userDetails);
+      // console.log(response.data.transactionsDetails);
+
+      setUser(response.data.userDetails);
+      setBalance(response.data.userDetails.balance);
+      setTransactions(response.data.transactionsDetails);
+    })
+  .catch((error) => {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage("Unauthorized access. Please log in again.");
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again later.");
+      }
+    });
 
     return () => {};
-  },[click]);
-  
+  }, [click]);
+  // console.log(user)
   const handleDeposit = async () => {
     setClick(!click)
     if (depositAmount <= 0) {
@@ -53,7 +69,7 @@ const UserDashboard = () => {
       setDepositAmount(0);
       setErrorMessage(null);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setErrorMessage("Deposit failed. Please try again later.");
     }
   };
@@ -77,12 +93,14 @@ const UserDashboard = () => {
       setWithdrawalAmount(0);
       setErrorMessage(null);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setErrorMessage("Withdrawal failed. Please try again later.");
     }
   };
-
+ 
   return (
+    <div>
+      
     <div className="user-dashboard">
       <h2>Dashboard</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -112,31 +130,18 @@ const UserDashboard = () => {
       />
       <button onClick={handleWithdrawal}>Withdraw</button>
       <h3>Transaction History</h3>
-      <table>
-  <thead>
-    <tr>
-      <th>Transaction ID</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Type</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    {transactions.map((transaction) => (
-      <tr key={transaction.id}>
-        <td>{transaction.id}</td>
-        <td>{transaction.date}</td>
-        <td>{transaction.time}</td>
-        <td>{transaction.type}</td>
-        <td class="amount">{transaction.amount}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+     
+ 
+ <Tran transactions={transactions}/>
 
     </div>
+   
+    
+    </div>
+    
+    
   );
 };
+
 
 export default UserDashboard;

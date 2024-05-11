@@ -31,15 +31,11 @@ function verifyToken(req, res, next) {
    }
    };
 
-
-
-
-
 router.post('/register', async (req, res) => {
   
   
   try {
-  userHelper.register({...req.body}).then((user) => {
+  userHelper.register(req.body).then((user) => {
     // console.log(user)
     if (user.status) {
       res.status(201).json({status:true}); 
@@ -84,15 +80,19 @@ router.post('/login',(req, res) => {
 });
 
 router.get("/account" ,verifyToken,(req,res)=>{
-  
+ 
   const userId=req.headers['user']
   
   userHelper.userDetails(userId).then((userDetails)=>{
     
     userHelper.getUserTransaction(userId).then((transactionsDetails)=>{
-     console.log(userDetails)
+      
+        console.log(userDetails)
      console.log(transactionsDetails)
       res.json({userDetails,transactionsDetails})
+     
+     
+  
     })
     
   })
