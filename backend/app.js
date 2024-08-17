@@ -6,7 +6,7 @@ var logger = require('morgan');
 var db=require('./config/connection')
 require('dotenv').config();
 
-const jwtSecret = process.env.JWT_SECRET;
+
 
 
 
@@ -27,7 +27,7 @@ var adminRouter = require('./routes/admin');
 
 
 
-app.use(cors());
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());

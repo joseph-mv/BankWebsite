@@ -1,14 +1,15 @@
 import React from 'react'
-import DashaBoard from'./../component/DashBoard'
+import DashBoard from'../component/DashBoard/DashBoard'
 
-import Header from './../component/Header';
+import Header from '../component/Header/Header';
 
 function DashBoardPage() {
   
   return (
     <div>
         <Header/>
-        <DashaBoard/>
+        <DashBoard/>
+        
 
     </div>
   )

@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import DashBoard from './pages/DashBoard';
 import React from 'react';
 
-
+import './App.css'
 function App() {
   
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dash-board" element={<DashBoard />}  />
+        
       </Routes>
     </Router>
     </div>

@@ -2,9 +2,8 @@ db = require("../config/connection");
 const promise = require("promise");
 const bcrypt = require("bcrypt");
 const collection = require("../config/collection");
-const { response } = require("express");
-const { ObjectId, Transaction } = require("mongodb");
-const { resolve } = require("path");
+
+const { ObjectId } = require("mongodb");
 
 module.exports = {
   register: (user) => {
@@ -42,7 +41,8 @@ module.exports = {
         const saltRounds = 10;
         user.password = await bcrypt.hash(user.password, saltRounds);
         user.AcNO = Ac_No;
-        user.balance=0
+        user.balance = 0;
+        user.status="Active"
         db.get()
           .collection(collection.User_Collection)
           .insertOne(user)
@@ -69,10 +69,10 @@ module.exports = {
             userId: existingUser._id,
           });
         } else {
-          resolve({ status: false });
+          reject({ status: false });
         }
       } else {
-        resolve({ status: false });
+        reject({ status: false });
       }
     });
   },
@@ -85,54 +85,113 @@ module.exports = {
           resolve(response);
         });
     });
-
   },
-  deposit:({amount,userId})=>{
-   return new promise((resolve,reject)=>{
-    // console.log(amount)
-    amount=parseFloat(amount)
-    db.get().collection(collection.User_Collection).updateOne({_id: new ObjectId(userId)},{$inc:{balance:amount}}).then((response)=>{
-        console.log(response)
-        resolve()
-    })
-   })
-  },
-  withdraw:({amount,userId})=>{
-   return new promise((resolve,reject)=>{
-    // console.log(amount)
-    amount=-(parseFloat(amount))
-    db.get().collection(collection.User_Collection).updateOne({_id: new ObjectId(userId)},{$inc:{balance:amount}}).then((response)=>{
-        // console.log(response)
-        resolve()
-    })
-   })
-  },
-  transcationHistory:async(transcationDetails,userId)=>{
-
-    oldTransactions=await db.get().collection(collection.Transaction_Collection).findOne({userId:userId})
-
-    if(oldTransactions){
-        db.get().collection(collection.Transaction_Collection).updateOne({userId:userId},{
-            $push:{transcationHistory:transcationDetails}
-        })
-    }
+  transaction: ({ amount, userId }) => {
     
-    userTransactions={
-        userId,
-        transcationHistory:[transcationDetails]
-    }
-    db.get().collection(collection.Transaction_Collection).insertOne(userTransactions).then((res)=>{
-        
-    })
-
+    return new promise((resolve, reject) => {
+      amount = parseFloat(amount);
+      db.get()
+        .collection(collection.User_Collection)
+        .updateOne({ _id: new ObjectId(userId) }, { $inc: { balance: amount } })
+        .then((response) => {
+          // console.log(response);
+          resolve();
+        });
+    });
   },
-  getUserTransaction:(userId)=>{
-    return new promise((resolve,reject)=>{
-        db.get().collection(collection.Transaction_Collection).findOne({userId:userId}).then((response)=>{
-            
-            resolve(response.transcationHistory.reverse())
-        })
+  withdraw: ({ amount, userId }) => {
+    return new promise((resolve, reject) => {
+      // console.log(amount)
+      amount = -parseFloat(amount);
+      db.get()
+        .collection(collection.User_Collection)
+        .updateOne({ _id: new ObjectId(userId) }, { $inc: { balance: amount } })
+        .then((response) => {
+          // console.log(response)
+          resolve();
+        });
+    });
+  },
+  sendMoney: ({ amount, account }) => {
+  //  console.log(account)
+    return new promise(async(resolve, reject) => {
+      const recipient= await db.get().collection(collection.User_Collection).findOne({AcNO:parseInt(account)})
+      // console.log((recipient))
+      if(!recipient){
+        console.log('no recipient')
+        reject("Invalid Account Number")
+      }else{
+        console.log('recipient')
+        await db.get().collection(collection.User_Collection).updateOne(
+          { AcNO: parseInt(account) },
+          { $inc: { balance: parseFloat(amount) } }
+        );
+        resolve()
+      }
     })
-  }
+  },
+  // transactionHistory: async (transactionDetails, userId) => {
+  //   oldTransactions = await db
+  //     .get()
+  //     .collection(collection.Transaction_Collection)
+  //     .findOne({ userId: userId });
 
+  //   if (oldTransactions) {
+  //     db.get()
+  //       .collection(collection.Transaction_Collection)
+  //       .updateOne(
+  //         { userId: userId },
+  //         {
+  //           $push: { transactionHistory: transactionDetails },
+  //         }
+  //       );
+  //   }
+
+  //   userTransactions = {
+  //     userId,
+  //     transactionHistory: [transactionDetails],
+  //   };
+  //   db.get()
+  //     .collection(collection.Transaction_Collection)
+  //     .insertOne(userTransactions)
+  //     .then((res) => { });
+  // },
+  transactionHistory: async (transactionDetails, userId,recipient=null) => {
+ await db.get().collection(collection.Transaction_Collection).insertOne({userId:userId,transactionDetails: transactionDetails,recipient:recipient})
+  },
+  getUserTransaction: ({userId,acNo}) => {
+    // console.log((acNo))
+    return new promise((resolve, reject) => {
+      db.get()
+        .collection(collection.Transaction_Collection)
+        .find({"$or": [{userId: userId}, {recipient: acNo.toString()}]}).toArray()
+        .then((response) => {
+          // console.log(response)
+          if(response){
+            resolve(response.reverse());
+          }else{
+            resolve([])
+          }
+          
+        });
+    });
+  },
+  getReceived:(acNo)=>{
+    
+    return new promise((resolve, reject) => {
+      db.get()
+       .collection(collection.Transaction_Collection)
+       .find({ recipient: acNo.toString() }).toArray()
+       .then((response) => {
+         
+          if(response){
+            resolve(response.reverse());
+          }else{
+            resolve([])
+          }
+          
+        });
+    });
+  }
 };
+

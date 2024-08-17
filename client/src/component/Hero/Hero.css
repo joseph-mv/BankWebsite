@@ -1,0 +1,114 @@
+/* Hero.css */
+
+.xyz-bank {
+  display: flex;
+  background-color: #f4f4f4;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+}
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.hero {
+  /* background-color: #3D98B4;  */
+  background: url('../../../public/cool-background\ \(3\).png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  padding: 50px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin: 0 0 20px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin: 0 0 30px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  /* background-color: red; */
+
+}
+
+.button {
+  border: none;
+  width: 20vw !important;
+  padding: 15px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button.login {
+  background-color: #ff4b5c; /* Login button color */
+  color: white;
+}
+
+.button.login:hover {
+  background-color: #ff6b7c;
+}
+
+.button.register {
+  background-color: #0a1a1e; /* Register button color */
+  color: white;
+}
+
+.button.register:hover {
+  background-color: #07121481;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  
+
+  .button {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.875rem;
+  }
+
+  .button {
+    padding: 10px;
+    font-size: 0.75rem;
+  }
+}

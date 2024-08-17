@@ -1,9 +1,10 @@
 import React from 'react'
-import Register from '../component/Register'
-
+import Header from '../component/Header/Header'
+import Register from '../component/Register/Register'
 function RegisterPage() {
   return (
     <div>
+      <Header/>
       <Register/>
     </div>
   )

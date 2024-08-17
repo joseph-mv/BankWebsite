@@ -1,0 +1,20 @@
+.data-table {
+    border-collapse: collapse;
+    width: 100%; /* Adjust width as needed */
+    margin: 20px auto; /* Add margin for better spacing */
+  }
+  
+  .data-table thead th {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+    
+    background-color: #f2f2f2; /* Light background for header */
+  }
+  
+  .data-table tbody td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    color: #ddd;
+  }
+  
