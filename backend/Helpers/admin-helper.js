@@ -26,6 +26,51 @@ module.exports={
         })
      
     },
+    adminStats:()=>{
+        return new promise(async(resolve,reject)=>{
+            try {
+                // Total number of users
+                const User = db.get().collection(collection.User_Collection);
+                const totalUsers = await User.countDocuments();
+                
+                const totalBalance = await User.aggregate([
+                    {
+                        $group:{
+                            _id: null,
+                            totalBalance: {
+                              $sum: "$balance"
+                            }
+                          },
+                    },
+                ]).toArray();
+                // console.log(totalBalance[0])
+        
+                // New users this month
+                const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+                const newUsersThisMonth = await User.countDocuments({
+                    createdAt: { $gte: startOfMonth },
+                });
+                // console.log(newUsersThisMonth)
+                totalTransactions=await db.get().collection(collection.Transaction_Collection).countDocuments()
+               resolve({
+                users: totalUsers,
+                totalAmount: totalBalance[0].totalBalance,
+                transactions: totalTransactions,
+                loansIssued: 0,
+                activeLoans: 0,
+                interestEarned: 0,
+                newAccounts:newUsersThisMonth,
+                totalDeposits: 0,
+ 
+               })
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+               reject({ error: 'Failed to fetch stats' });
+            }
+
+
+        })
+    },
     getUsers:()=>{
         return new promise(async(resolve,reject)=>{
             db.get().collection(collection.User_Collection).find({}).toArray().then((response)=>{

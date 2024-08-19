@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './Users.css'
-
+const baseUrl = process.env.REACT_APP_BASE_URL 
 
 
 function Users() {
@@ -12,7 +12,7 @@ function Users() {
   // console.log(id)
 
   useEffect(() => {
-    axios.get("http://localhost:9000/admin/users", {
+    axios.get(`${baseUrl}/admin/users`, {
       headers: {
         Authorization: token,
         Id: id,

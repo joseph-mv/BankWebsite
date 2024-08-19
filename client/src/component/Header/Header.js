@@ -14,6 +14,11 @@ const Header = () => {
   };
 
   const toggleMenu = () => {
+    if (!isMenuOpen) {
+      document.body.classList.add('fixed-body');
+  } else {
+      document.body.classList.remove('fixed-body');
+  }
     setIsMenuOpen(!isMenuOpen);
   };
 

@@ -4,3 +4,8 @@ body{
     font-family: sans-serif;
     background-color: #f5f5f5;
 }
+.fixed-body {
+    position: fixed;
+    width: 100%;
+   
+}

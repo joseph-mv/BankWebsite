@@ -43,6 +43,7 @@ module.exports = {
         user.AcNO = Ac_No;
         user.balance = 0;
         user.status="Active"
+        user.createdAt = new Date
         db.get()
           .collection(collection.User_Collection)
           .insertOne(user)
@@ -176,22 +177,6 @@ module.exports = {
         });
     });
   },
-  getReceived:(acNo)=>{
-    
-    return new promise((resolve, reject) => {
-      db.get()
-       .collection(collection.Transaction_Collection)
-       .find({ recipient: acNo.toString() }).toArray()
-       .then((response) => {
-         
-          if(response){
-            resolve(response.reverse());
-          }else{
-            resolve([])
-          }
-          
-        });
-    });
-  }
+  
 };
 

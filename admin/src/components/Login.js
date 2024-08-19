@@ -3,6 +3,7 @@ import './Login.css'; // Import your CSS file for styling
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const baseUrl = process.env.REACT_APP_BASE_URL 
   const navigate = useNavigate();
   const [adminId, setAdminId] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ const Login = () => {
     } 
     try {
         
-        const response = await axios.post('http://localhost:9000/admin', {
+        const response = await axios.post(`${baseUrl}/admin`, {
           adminId,
           password,
         });

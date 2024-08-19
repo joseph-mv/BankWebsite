@@ -17,6 +17,7 @@ function verifyToken(req, res, next) {
    req.userId = decoded.userId;
    next();
    } catch (error) {
+    // console.log(error)
    res.status(401).json({ error: 'Invalid token' });
    }
    };
@@ -49,6 +50,14 @@ router.post('/', function(req, res, next) {
 
 
 });
+router.get('/stats',verifyToken,function(req, res) {
+  
+  adminHelper.adminStats().then(data=>{
+    // console.log(data)
+    res.json(data)
+  })
+})
+
 router.get("/users",verifyToken,function(req,res){
   
 const admin=req.headers['id']
