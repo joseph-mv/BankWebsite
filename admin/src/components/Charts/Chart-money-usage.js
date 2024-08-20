@@ -40,12 +40,12 @@ const MoneyUsageChart = () => {
             label: 'Money Usage',
             data: moneyUsage.map(item=>Math.abs(item.totalAmount)), // Example values
             backgroundColor: [
-              'rgba(54, 162, 235, 0.6)',  // Debit
-              'rgba(255, 206, 86, 0.6)',  // Recharge
-              'rgba(75, 192, 192, 0.6)',  // Bills
-              'rgba(153, 102, 255, 0.6)', // Shopping
-              'rgba(255, 159, 64, 0.6)',  // Entertainment
-              'rgba(255, 99, 132, 0.6)',  // Others
+              'rgba(54, 162, 235, 0.6)',  
+              'rgba(255, 206, 86, 0.6)',  
+              'rgba(75, 192, 192, 0.6)',  
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',  
+              'rgba(255, 99, 132, 0.6)',  
             ],
             borderColor: [
               'rgba(54, 162, 235, 1)',

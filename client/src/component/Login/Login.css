@@ -112,7 +112,7 @@
   outline: none;
 }
 
-.submit-btn {
+.loginform .submit-btn {
   width: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -126,7 +126,7 @@
   transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
+.loginform .submit-btn:hover {
   background-color: #2a7d8b;
 }
 
@@ -173,7 +173,7 @@
     padding: 8px;
   }
 
-  .submit-btn {
+  .loginform .submit-btn {
     font-size: 0.85rem;
     padding: 8px;
    
