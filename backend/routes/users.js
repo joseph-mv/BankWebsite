@@ -109,7 +109,7 @@ const seconds = now.getSeconds();
   transactionDetails={
     date:now.toDateString(),
     time:`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
-    amount:req.body.amount,
+    amount:+(req.body.amount),
     type:req.body.description,
     description:'Deposit'
   }

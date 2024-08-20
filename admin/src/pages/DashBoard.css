@@ -1,0 +1,48 @@
+.dash-container {
+    display: grid;
+    grid-template-areas: 
+        'bankStats graph1 graph2' 
+        'bankStats graph3 graph4';
+    width: 100vw;
+    height: 85vh;
+}
+
+.dash-container > :first-child {
+    grid-area: bankStats;
+}
+.dash-container > :first-child {
+    grid-area: bankStats;
+    background-color: lightblue; /* For testing */
+}
+
+
+
+@media (max-width: 1000px) {
+    .dash-container {
+        /* align-items: center; */
+        /* justify-content: center; */
+        grid-template-areas: 
+            'bankStats graph1' 
+            'bankStats graph2' 
+            'graph3 graph4';
+            
+            /* background-color: red; */
+           
+    }
+    .dash-container > *:not(:first-child) {
+        /* background-color: yellow; */
+        padding: 10px;
+        margin: 5px;
+        /* grid-area: graph; */
+        height: 40vh;
+        width: 45vw;
+
+    }
+    .dash-container>:first-child{
+        margin-left: 50%;
+        transform: translate(-50%);
+        
+    }
+    
+    
+}

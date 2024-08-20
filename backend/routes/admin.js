@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var adminHelper=require("../Helpers/admin-helper")
+const userHelper=require('../Helpers/user-helpers')
 var jwt = require('jsonwebtoken');
 
 
@@ -32,7 +33,7 @@ router.post('/', function(req, res, next) {
         adminId:req.body.adminId
     },
     process.env.TOKEN_SECRET,
-    { expiresIn: "1h" }
+    { expiresIn: "10h" }
 );
   res.json({
     adminLoggedIn:true,
@@ -66,6 +67,37 @@ adminHelper.getUsers().then((response)=>{
   res.json(response)
 })
 
+})
+
+router.post('/edit-user',verifyToken,function(req,res){
+  // console.log(req.body)
+  adminHelper.editUser(req.body).then((response)=>{
+    res.json(response)
+  })
+})
+
+router.get('/user-transactions',verifyToken,function(req,res){
+  
+  const userId=req.headers['user']
+  const acNo=req.headers['account']
+//  console.log(acNo)
+  userHelper.getUserTransaction({userId,acNo}).then((transactionsDetails)=>{
+    transactionsDetails.map((transaction)=>{
+      if(transaction.userId!==userId){
+        transaction.transactionDetails.amount=transaction.transactionDetails.amount*-1
+        transaction.transactionDetails.type="Deposit"
+        transaction.transactionDetails.description=`Recieved from ${transaction.transactionDetails.remitter}`
+      }
+      return transaction
+    })
+      
+      res.json({transactionsDetails})
+  //  console.log(transactionsDetails)
+    
+   
+   
+
+  })
 })
 
 module.exports = router;

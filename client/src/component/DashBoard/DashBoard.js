@@ -317,10 +317,13 @@ function UserDashboard() {
     }
   };
   
-console.log((transactions))
+console.log((user?.status))
+
+
   return (
     <div className="dashboard-container">
       <h2>Dashboard</h2>
+     
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="user-dashboard">
         <div className="account-section">
@@ -357,264 +360,275 @@ console.log((transactions))
             </ul>
           </div>
         </div>
-        <div className="actions-section">
-          <div className="row">
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("sendMoney")}
-            >
-              <h3>
-                <i className="fas fa-paper-plane"></i> Send Money
-              </h3>
-            </div>
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("payBills")}
-            >
-              <h3>
-                <i className="fas fa-file-invoice-dollar"></i> Pay Bills
-              </h3>
-            </div>
-          </div>
-          <div className="row">
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("recharge")}
-            >
-              <h3>
-                <i className="fas fa-mobile-alt"></i> Recharge
-              </h3>
-            </div>
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("invest")}
-            >
-              <h3>
-                <i className="fas fa-chart-line"></i> Invest
-              </h3>
-            </div>
-          </div>
-          <div className="row">
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("loans")}
-            >
-              <h3>
-                <i className="fas fa-hand-holding-usd"></i> Loans
-              </h3>
-            </div>
-            <div
-              className="action-box"
-              onClick={() => handlePopupOpen("creditCard")}
-            >
-              <h3>
-                <i className="fas fa-credit-card"></i> Credit Card
-              </h3>
-            </div>
-          </div>
-          <div className="row">
-            <div className="action-box">
-              <h3>
-                <i className="fas fa-piggy-bank"></i> Deposit
-              </h3>
-              <form className="deposit-form">
-                <input
-                  type="number"
-                  placeholder="Amount"
-                  className="form-input"
-                  value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
-                />
-                <button
-                  onClick={handleDeposit}
-                  type="submit"
-                  className="submit-btn"
-                >
-                  <i className="fas fa-arrow-down"></i> Deposit Funds
-                </button>
-              </form>
-            </div>
-            <div className="action-box">
-              <h3>
-                <i className="fas fa-money-bill-wave"></i> Withdraw
-              </h3>
-              <form className="withdraw-form">
-                <input
-                  type="number"
-                  placeholder="Amount"
-                  className="form-input"
-                  value={withdrawalAmount}
-                  onChange={(e) => setWithdrawalAmount(e.target.value)}
-                />
-                <button
-                  onClick={handleWithdrawal}
-                  type="submit"
-                  className="submit-btn"
-                >
-                  <i className="fas fa-arrow-up"></i> Withdraw Funds
-                </button>
-              </form>
-            </div>
-          </div>
+        {user?.status==='InActive'?
+       <div className="inActive">
+       <h2>Your Account is Inactive</h2>
+       <p>Please contact the bank to activate your account.</p>
+       <p>Contact Number: 123-456-7890</p>
+       <p>Email: support@xyzbank.com</p>
+       <p>Address: 123 Main St, City, State, Zip</p>
+     </div>:
+     <div className="actions-section">
+       
+     <div className="row">
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("sendMoney")}
+       >
+         <h3>
+           <i className="fas fa-paper-plane"></i> Send Money
+         </h3>
+       </div>
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("payBills")}
+       >
+         <h3>
+           <i className="fas fa-file-invoice-dollar"></i> Pay Bills
+         </h3>
+       </div>
+     </div>
+     <div className="row">
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("recharge")}
+       >
+         <h3>
+           <i className="fas fa-mobile-alt"></i> Recharge
+         </h3>
+       </div>
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("invest")}
+       >
+         <h3>
+           <i className="fas fa-chart-line"></i> Invest
+         </h3>
+       </div>
+     </div>
+     <div className="row">
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("loans")}
+       >
+         <h3>
+           <i className="fas fa-hand-holding-usd"></i> Loans
+         </h3>
+       </div>
+       <div
+         className="action-box"
+         onClick={() => handlePopupOpen("creditCard")}
+       >
+         <h3>
+           <i className="fas fa-credit-card"></i> Credit Card
+         </h3>
+       </div>
+     </div>
+     <div className="row">
+       <div className="action-box">
+         <h3>
+           <i className="fas fa-piggy-bank"></i> Deposit
+         </h3>
+         <form className="deposit-form">
+           <input
+             type="number"
+             placeholder="Amount"
+             className="form-input"
+             value={depositAmount}
+             onChange={(e) => setDepositAmount(e.target.value)}
+           />
+           <button
+             onClick={handleDeposit}
+             type="submit"
+             className="submit-btn"
+           >
+             <i className="fas fa-arrow-down"></i> Deposit Funds
+           </button>
+         </form>
+       </div>
+       <div className="action-box">
+         <h3>
+           <i className="fas fa-money-bill-wave"></i> Withdraw
+         </h3>
+         <form className="withdraw-form">
+           <input
+             type="number"
+             placeholder="Amount"
+             className="form-input"
+             value={withdrawalAmount}
+             onChange={(e) => setWithdrawalAmount(e.target.value)}
+           />
+           <button
+             onClick={handleWithdrawal}
+             type="submit"
+             className="submit-btn"
+           >
+             <i className="fas fa-arrow-up"></i> Withdraw Funds
+           </button>
+         </form>
+       </div>
+     </div>
 
-          {/* Send Money Popup */}
-          {activePopup === "sendMoney" && (
-            <div className="popup">
-              <div className="popup-content">
-                <h2>
-                  <i className="fas fa-paper-plane"></i> Send Money
-                </h2>
-                <form
-                  className="fund-transfer-form"
-                  onSubmit={handleSendMoneySubmit}
-                >
-                  <input
-                    type="number"
-                    name="account"
-                    placeholder="Account Number"
-                    value={sendMoneyForm.account}
-                    onChange={handleSendMoneyChange}
-                    className="form-input"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={sendMoneyForm.amount}
-                    onChange={handleSendMoneyChange}
-                    className="form-input"
-                    required
-                    min="1"
-                  />
-                  <button type="submit" className="submit-btn">
-                    <i className="fas fa-exchange-alt"></i> Transfer Funds
-                  </button>
-                </form>
-                <button className="close-btn" onClick={handlePopupClose}>
-                  <i className="fas fa-times"></i> Close
-                </button>
-              </div>
-            </div>
-          )}
+     {/* Send Money Popup */}
+     {activePopup === "sendMoney" && (
+       <div className="popup">
+         <div className="popup-content">
+           <h2>
+             <i className="fas fa-paper-plane"></i> Send Money
+           </h2>
+           <form
+             className="fund-transfer-form"
+             onSubmit={handleSendMoneySubmit}
+           >
+             <input
+               type="number"
+               name="account"
+               placeholder="Account Number"
+               value={sendMoneyForm.account}
+               onChange={handleSendMoneyChange}
+               className="form-input"
+               required
+             />
+             <input
+               type="number"
+               name="amount"
+               placeholder="Amount"
+               value={sendMoneyForm.amount}
+               onChange={handleSendMoneyChange}
+               className="form-input"
+               required
+               min="1"
+             />
+             <button type="submit" className="submit-btn">
+               <i className="fas fa-exchange-alt"></i> Transfer Funds
+             </button>
+           </form>
+           <button className="close-btn" onClick={handlePopupClose}>
+             <i className="fas fa-times"></i> Close
+           </button>
+         </div>
+       </div>
+     )}
 
-          {/* Pay Bills Popup */}
-          {activePopup === "payBills" && (
-            <div className="popup">
-              <div className="popup-content">
-                <h2>
-                  <i className="fas fa-file-invoice-dollar"></i> Pay Bills
-                </h2>
-                <form
-                  className="bill-payment-form"
-                  onSubmit={handlePayBillSubmit}
-                >
-                  <input
-                    type="text"
-                    name="payee"
-                    placeholder="Bill Payee"
-                    value={payBillForm.payee}
-                    onChange={handlePayBillChange}
-                    className="form-input"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={payBillForm.amount}
-                    onChange={handlePayBillChange}
-                    className="form-input"
-                    required
-                    min="1"
-                  />
-                  <button type="submit" className="submit-btn">
-                    <i className="fas fa-money-check-alt"></i> Pay Bill
-                  </button>
-                </form>
-                <button className="close-btn" onClick={handlePopupClose}>
-                  <i className="fas fa-times"></i> Close
-                </button>
-              </div>
-            </div>
-          )}
+     {/* Pay Bills Popup */}
+     {activePopup === "payBills" && (
+       <div className="popup">
+         <div className="popup-content">
+           <h2>
+             <i className="fas fa-file-invoice-dollar"></i> Pay Bills
+           </h2>
+           <form
+             className="bill-payment-form"
+             onSubmit={handlePayBillSubmit}
+           >
+             <input
+               type="text"
+               name="payee"
+               placeholder="Bill Payee"
+               value={payBillForm.payee}
+               onChange={handlePayBillChange}
+               className="form-input"
+               required
+             />
+             <input
+               type="number"
+               name="amount"
+               placeholder="Amount"
+               value={payBillForm.amount}
+               onChange={handlePayBillChange}
+               className="form-input"
+               required
+               min="1"
+             />
+             <button type="submit" className="submit-btn">
+               <i className="fas fa-money-check-alt"></i> Pay Bill
+             </button>
+           </form>
+           <button className="close-btn" onClick={handlePopupClose}>
+             <i className="fas fa-times"></i> Close
+           </button>
+         </div>
+       </div>
+     )}
 
-          {/* Recharge Popup */}
-          {activePopup === "recharge" && (
-            <div className="popup">
-              <div className="popup-content">
-                <h2>
-                  <i className="fas fa-mobile-alt"></i> Recharge
-                </h2>
-                <form className="recharge-form" onSubmit={handleRechargeSubmit}>
-                  <input
-                    type="number"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    value={rechargeForm.mobile}
-                    onChange={handleRechargeChange}
-                    className="form-input"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={rechargeForm.amount}
-                    onChange={handleRechargeChange}
-                    className="form-input"
-                    required
-                    min="1"
-                  />
-                  <button type="submit" className="submit-btn">
-                    <i className="fas fa-paper-plane"></i> Recharge Now
-                  </button>
-                </form>
-                <button className="close-btn" onClick={handlePopupClose}>
-                  <i className="fas fa-times"></i> Close
-                </button>
-              </div>
-            </div>
-          )}
+     {/* Recharge Popup */}
+     {activePopup === "recharge" && (
+       <div className="popup">
+         <div className="popup-content">
+           <h2>
+             <i className="fas fa-mobile-alt"></i> Recharge
+           </h2>
+           <form className="recharge-form" onSubmit={handleRechargeSubmit}>
+             <input
+               type="number"
+               name="mobile"
+               placeholder="Mobile Number"
+               value={rechargeForm.mobile}
+               onChange={handleRechargeChange}
+               className="form-input"
+               required
+             />
+             <input
+               type="number"
+               name="amount"
+               placeholder="Amount"
+               value={rechargeForm.amount}
+               onChange={handleRechargeChange}
+               className="form-input"
+               required
+               min="1"
+             />
+             <button type="submit" className="submit-btn">
+               <i className="fas fa-paper-plane"></i> Recharge Now
+             </button>
+           </form>
+           <button className="close-btn" onClick={handlePopupClose}>
+             <i className="fas fa-times"></i> Close
+           </button>
+         </div>
+       </div>
+     )}
 
-          {/* Invest Popup */}
-          {activePopup === "invest" && (
-            <div className="popup">
-              <div className="popup-content">
-                <h2>
-                  <i className="fas fa-chart-line"></i> Invest
-                </h2>
-                <form className="invest-form" onSubmit={handleInvestSubmit}>
-                  <input
-                    type="text"
-                    name="plan"
-                    placeholder="Investment Plan"
-                    value={investForm.plan}
-                    onChange={handleInvestChange}
-                    className="form-input"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={investForm.amount}
-                    onChange={handleInvestChange}
-                    className="form-input"
-                    required
-                    min="1"
-                  />
-                  <button type="submit" className="submit-btn">
-                    <i className="fas fa-paper-plane"></i> Invest Now
-                  </button>
-                </form>
-                <button className="close-btn" onClick={handlePopupClose}>
-                  <i className="fas fa-times"></i> Close
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+     {/* Invest Popup */}
+     {activePopup === "invest" && (
+       <div className="popup">
+         <div className="popup-content">
+           <h2>
+             <i className="fas fa-chart-line"></i> Invest
+           </h2>
+           <form className="invest-form" onSubmit={handleInvestSubmit}>
+             <input
+               type="text"
+               name="plan"
+               placeholder="Investment Plan"
+               value={investForm.plan}
+               onChange={handleInvestChange}
+               className="form-input"
+               required
+             />
+             <input
+               type="number"
+               name="amount"
+               placeholder="Amount"
+               value={investForm.amount}
+               onChange={handleInvestChange}
+               className="form-input"
+               required
+               min="1"
+             />
+             <button type="submit" className="submit-btn">
+               <i className="fas fa-paper-plane"></i> Invest Now
+             </button>
+           </form>
+           <button className="close-btn" onClick={handlePopupClose}>
+             <i className="fas fa-times"></i> Close
+           </button>
+         </div>
+       </div>
+     )}
+   </div>
+     }
+        
       </div>
     </div>
   );

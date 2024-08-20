@@ -1,0 +1,158 @@
+.user-details-page{
+ width: 100vw;
+ display: flex;
+
+ justify-content: center;
+}
+
+.user-details-container {
+ 
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-info, .transaction-history-section, .edit-user, .account-actions {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-info h2, .transaction-history-section h2, .edit-user h2, .account-actions h2 {
+    margin-bottom: 15px;
+  }
+ 
+  .edit-user{
+    text-align: center;
+  }
+  .edit-user form {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .edit-user form label {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+
+  }
+  
+  .edit-user form input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    /* margin-right: 10vw; */
+  }
+  
+  .edit-user form button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 80%;
+    margin-left: 10%;
+  }
+  
+  .edit-user form button[type="button"] {
+    background-color: #6c757d;
+  }
+  .account-actions{
+    height: 150px;
+    padding: 20px;
+    text-align: center;
+
+  }
+  .account-actions button {
+    padding: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+ /* Transaction History */
+.transaction-history-section {
+  flex: 1;
+ max-height: 300px;
+ overflow:scroll;
+ scrollbar-width: none;
+}
+
+.transaction-history-section h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.transaction-filters {
+  margin-bottom: 15px;
+  margin-left: 0px;
+  /* background-color: red; */
+  
+}
+
+.transaction-filters label {
+  margin-right: 10px;
+float: left;
+}
+
+.transaction-filters select {
+  padding: 5px;
+  font-size: 16px;
+  
+}
+
+.transaction-history-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.378);
+  /* background-color: #2d7890; */
+}
+.dateAndtime{
+  font-size: 14px;
+  color: #999;
+  flex-basis: 100%;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.transaction-description {
+  font-size: 16px;
+  flex: 1;
+  text-align: start;
+}
+
+.transaction-amount {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.transaction-amount.credit {
+  color: green;
+}
+
+.transaction-amount.debit {
+  color: red;
+}
+  

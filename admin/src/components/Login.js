@@ -42,7 +42,8 @@ const Login = () => {
   };
 
   return (
-    <div id="login" className="login-container">
+    <div className="login-container">
+    <div id="login" >
       <img src="../../logo.png" alt="XYZ Bank Logo" className="logo" width="100px" /> {/* Add logo image URL */}
       <h2>XYZ Bank Admin Login</h2>
       <form name="form-login" onSubmit={handleSubmit}>
@@ -68,6 +69,7 @@ const Login = () => {
 
         <input type="submit" value="Login" />
       </form>
+    </div>
     </div>
   );
 };

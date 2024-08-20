@@ -1,14 +1,21 @@
 import React from 'react'
 import Header from '../components/Header/Header'
 import BankStats from '../components/BankStats/BankStats'
-import Charts from '../components/Charts/Charts'
-
+import ChartUser from '../components/Charts/Chart-user'
+import ChartTraAmount from '../components/Charts/Chart-tra-amount'
+import './DashBoard.css'
+import ChartTransaction from '../components/Charts/Chart-transaction'
 function Dashboard() {
   return (
-    <div>
+    <div >
         <Header/>
-      <BankStats/>
-        {/* <Charts/> */}
+        <div className='dash-container'>
+         <BankStats/>
+        <ChartUser/>
+        <ChartTransaction/>
+        <ChartTraAmount/>
+        <ChartTraAmount/>
+        </div>
     </div>
   )
 }

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 import './BankStats.css'
 import axios from 'axios';
+import { MyContext } from '../../store/context';
 const BankStats = () => {
-    const baseUrl = process.env.REACT_APP_BASE_URL 
+
+    const baseUrl = process.env.REACT_APP_BASE_URL
+    const {setTransactionsPerDay,setUsersPerDay}=useContext(MyContext) 
     const [stats, setStats] = useState({
         users: 0,
         totalAmount: 0,
@@ -28,7 +31,9 @@ const BankStats = () => {
                     },
                   });
                 setStats(response.data);
-                console.log((response))
+                // console.log((response.data))
+                setTransactionsPerDay(response.data.transactionsPerDay)
+                setUsersPerDay(response.data.newUsersPerDay)
             } catch (error) {
                 console.error('Error fetching stats:', error);
             }

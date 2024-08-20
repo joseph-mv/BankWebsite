@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faUsers, faFileInvoice, faCog, faChartBar, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './Header.css'; // Import your CSS file
+import {isTokenExpired}  from '../../utils/isTokenExpired'
 
 const Header = () => {
+  const token=localStorage.getItem('adminToken');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
   const toggleMenu = () => {
     if (!isMenuOpen) {
       document.body.classList.add('fixed-body');
@@ -22,6 +23,12 @@ const Header = () => {
     localStorage.removeItem('id');
     navigate('/');
   };
+  
+  useEffect(() => {
+    if (isTokenExpired(token) || !token) {
+      handleLogout();
+    }
+  }, [token]);
 
   return (
     <header className="admin-header">
