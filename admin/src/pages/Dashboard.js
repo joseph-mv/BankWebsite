@@ -5,6 +5,7 @@ import ChartUser from '../components/Charts/Chart-user'
 import ChartTraAmount from '../components/Charts/Chart-tra-amount'
 import './DashBoard.css'
 import ChartTransaction from '../components/Charts/Chart-transaction'
+import ChartMoneyUsage from '../components/Charts/Chart-money-usage'
 function Dashboard() {
   return (
     <div >
@@ -14,7 +15,7 @@ function Dashboard() {
         <ChartUser/>
         <ChartTransaction/>
         <ChartTraAmount/>
-        <ChartTraAmount/>
+       <ChartMoneyUsage/>
         </div>
     </div>
   )

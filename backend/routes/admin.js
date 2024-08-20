@@ -100,4 +100,11 @@ router.get('/user-transactions',verifyToken,function(req,res){
   })
 })
 
+router.get('/transactions',verifyToken,function(req, res){
+  // console.log('GET')
+  adminHelper.getTransactions().then((response)=>{
+    res.json(response)
+  })
+})
+
 module.exports = router;

@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import UserDetails from './pages/UserDetails'
+import Transaction from './pages/Transaction';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/dash-board" element={<Dashboard/>}/>
         <Route path="/users" element={<Users/>}/>
         <Route path="/users/user/:userId" element={<UserDetails/>}/>
+        <Route path="/transactions" element={<Transaction/>}/>
       </Routes>
     </BrowserRouter>
   );

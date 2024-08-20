@@ -5,7 +5,7 @@ import { MyContext } from '../../store/context';
 const BankStats = () => {
 
     const baseUrl = process.env.REACT_APP_BASE_URL
-    const {setTransactionsPerDay,setUsersPerDay}=useContext(MyContext) 
+    const {setTransactionsPerDay,setUsersPerDay,setMoneyUsage}=useContext(MyContext) 
     const [stats, setStats] = useState({
         users: 0,
         totalAmount: 0,
@@ -34,6 +34,7 @@ const BankStats = () => {
                 // console.log((response.data))
                 setTransactionsPerDay(response.data.transactionsPerDay)
                 setUsersPerDay(response.data.newUsersPerDay)
+                setMoneyUsage(response.data.moneyUsage)
             } catch (error) {
                 console.error('Error fetching stats:', error);
             }

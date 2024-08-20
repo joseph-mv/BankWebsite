@@ -149,7 +149,7 @@ router.post("/sendMoney", verifyToken, (req, res) => {
     date: now.toDateString(),
     time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
     amount: -(req.body.amount),
-    type: "Debit",
+    type: "Transfer",
     description: "Send Money to " + req.body.account,
     remitter: req.body.remitter
   };
@@ -191,7 +191,7 @@ router.post("/payBill", verifyToken, (req, res) => {
     date: now.toDateString(),
     time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
     amount: -req.body.amount,
-    type: "Debit",
+    type: "Bill Payment",
     description: "Pay Bill to " + req.body.payee,
   };
 
@@ -211,7 +211,7 @@ router.post("/recharge", verifyToken, (req, res) => {
     date: now.toDateString(),
     time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
     amount: -req.body.amount,
-    type: "Debit",
+    type: "Recharge",
     description: "Recharge for " + req.body.mobile,
   };
 
@@ -231,7 +231,7 @@ router.post("/invest", verifyToken, (req, res) => {
     date: now.toDateString(),
     time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`,
     amount: -req.body.amount,
-    type: "Debit",
+    type: "Invest",
     description: "Investment in " + req.body.plan,
   };
 

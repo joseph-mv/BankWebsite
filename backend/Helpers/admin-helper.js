@@ -40,7 +40,7 @@ module.exports = {
             },
           },
         ]).toArray();
-        console.log(totalBalance[0]);
+        // console.log(totalBalance[0]);
 
         // New users this month
         const startOfMonth = new Date(
@@ -111,7 +111,17 @@ module.exports = {
           // If both year and month are the same, compare by day
           return a._id.day - b._id.day;
         });
-        console.log(newUsersPerDay);
+        // console.log(newUsersPerDay);
+        const moneyUsage=await db.get().collection(collection.Transaction_Collection)
+        .aggregate([
+          {$group:{
+            _id: "$transactionDetails.type",
+  totalAmount: {
+    $sum: "$transactionDetails.amount"
+  }
+          }
+        }]).toArray()
+        // console.log(moneyUsage)
         resolve({
           users: totalUsers,
           totalAmount: totalBalance[0].totalBalance,
@@ -123,6 +133,7 @@ module.exports = {
           totalDeposits: 0,
           transactionsPerDay: transactionsPerDay,
           newUsersPerDay: newUsersPerDay,
+          moneyUsage:moneyUsage,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
@@ -154,6 +165,46 @@ module.exports = {
           console.error(error)
           reject({status:false,error:"Failed to update user"})
         })
+    })
+  },
+  getTransactions:()=>{
+    return new promise(async(resolve,reject)=>{
+      db.get().collection(collection.Transaction_Collection).aggregate([
+        {
+          $addFields: {
+            userIdObjectId: {
+              $toObjectId: "$userId"
+            }
+          }
+        },
+        // Perform a lookup to join with the 'Users' collection
+        {
+          $lookup: {
+            from: "Users",
+            localField: "userIdObjectId",
+            foreignField: "_id",
+            as: "userDetails"
+          }
+        },
+        // Unwind the resulting 'userDetails' array
+        {
+          $unwind: "$userDetails"
+        },
+        // Project the desired fields
+        {
+          $project: {
+            transactionDetails: 1,
+            recipient: 1,
+            _id: 1,
+            userId: 1,
+            "userDetails.name": 1,
+            "userDetails.AcNO": 1
+          }
+        }
+      ]).toArray().then(data => {
+        // console.log(data)
+        resolve(data)
+      })
     })
   }
 
