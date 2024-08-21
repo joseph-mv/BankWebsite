@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./DashBoard.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
-
+import {isTokenExpired}  from '../../utils/isTokenExpired'
+import { useNavigate } from "react-router-dom";
 function UserDashboard() {
   const baseUrl = process.env.REACT_APP_BASE_URL 
-
+  const navigate = useNavigate();
   const [activePopup, setActivePopup] = useState(null);
 
   const handlePopupOpen = (popupType) => {
@@ -45,7 +46,13 @@ function UserDashboard() {
     plan: "",
     amount: "",
   });
-
+  useEffect(() => {
+    if (isTokenExpired(token) || !token) {
+      localStorage.removeItem("token");
+     
+      navigate("/login");
+    }
+  }, [token]);
   useEffect(() => {
 
     axios

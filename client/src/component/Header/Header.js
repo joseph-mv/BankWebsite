@@ -1,23 +1,17 @@
 import React, { useState,useEffect } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import {isTokenExpired}  from '../../utils/isTokenExpired'
+
 const Header = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
+ console.log(token)
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(""); 
     navigate("/login");
   };
-
-  useEffect(() => {
-    if (isTokenExpired(token) || !token) {
-      handleLogout();
-    }
-  }, [token]);
 
   const toggleMenu = () => {
     if (!isMenuOpen) {
