@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/Header/Header'
-import Users from '../components/Users'
+import Users from '../components/Users/Users'
 
 function UsersPage() {
   return (

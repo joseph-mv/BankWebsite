@@ -38,6 +38,7 @@ h1 {
   display: flex;
   align-items: center;
   margin-left: auto;
+ 
 }
 
 .nav-links {
@@ -85,7 +86,7 @@ h1 {
     top: 80px; 
     right: 0;
     width: 200px; 
-    
+    z-index: 99;
     height: 100vh;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 4px;

@@ -18,5 +18,23 @@
     width: 97%;
     border-collapse: collapse;
     margin: 0 auto;
+    
 }
+.table .MuiTable-root {
+    background-color: rgb(231, 21, 21);
+    color: white;
+    z-index: 5;
+  }
+  .table .MuiTableCell-root {
+    background-color: rgba(0, 0, 0, 0.636);
+    color: white; /* Table cell text color */
+  }
+ 
+  .table .MuiTablePagination-root {
+    /* background-color: black; */
+    color: rgb(84, 84, 84);
+  }
   
+  
+
+ 
