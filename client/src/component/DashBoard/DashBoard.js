@@ -120,9 +120,10 @@ function UserDashboard() {
       [name]: value,
     }));
   };
+  
   const handleDeposit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    setClick(!click);
+    setClick(prev=>!prev);
     if (depositAmount <= 0) {
       setErrorMessage("Please enter a valid deposit amount.");
       return;
@@ -151,7 +152,7 @@ function UserDashboard() {
 
   const handleWithdrawal = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    setClick(!click);
+    setClick(prev=>!prev);
     if (withdrawalAmount <= 0 || withdrawalAmount > balance) {
       setErrorMessage("Please enter a valid withdrawal amount.");
       return;
@@ -179,7 +180,7 @@ function UserDashboard() {
   // Submission handlers for each form
   const handleSendMoneySubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    setClick(!click); // Toggle click state
+    setClick(prev=>!prev); // Toggle click state
    
     try {
       setErrorMessage('')
@@ -221,7 +222,7 @@ function UserDashboard() {
   
   const handlePayBillSubmit = async (e) => {
     e.preventDefault();
-    setClick(!click);
+    setClick(prev=>!prev);
   
     
   
@@ -256,7 +257,7 @@ function UserDashboard() {
   
   const handleRechargeSubmit = async (e) => {
     e.preventDefault();
-    setClick(!click);
+    setClick(prev=>!prev);
   
    
   
@@ -291,7 +292,7 @@ function UserDashboard() {
   
   const handleInvestSubmit = async (e) => {
     e.preventDefault();
-    setClick(!click);
+    setClick(prev=>!prev);
   
     
     try {
