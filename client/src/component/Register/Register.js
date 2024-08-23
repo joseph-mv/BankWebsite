@@ -28,7 +28,7 @@ const Register = () => {
         password,
       });
 
-      console.log(response.data);
+      // console.log(response.data);
       if(response.data.status){
         navigate('/login');
       } else {

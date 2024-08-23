@@ -63,7 +63,7 @@ function UserDashboard() {
         },
       })
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         // console.log(response.data.userDetails);
         // console.log(response.data.transactionsDetails);
 
@@ -325,7 +325,7 @@ function UserDashboard() {
     }
   };
   
-console.log((user?.status))
+// console.log((user?.status))
 
 
   return (

@@ -6,7 +6,7 @@ const Header = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
- console.log(token)
+//  console.log(token)
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(""); 
