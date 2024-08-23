@@ -23,7 +23,7 @@ const Login = () => {
           adminId,
           password,
         });
-          console.log(response)
+          // console.log(response)
         if (response.data.adminLoggedIn) {
           localStorage.setItem("adminToken",response.data.token)
           localStorage.setItem("id",response.data.id)

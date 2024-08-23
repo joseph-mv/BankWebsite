@@ -10,9 +10,10 @@ const ChartTraAmount = () => {
   // console.log(transactionsPerDay)
   var transactions=[]
   if(transactionsPerDay.length){
-       transactions=transactionsPerDay.reverse().slice(-10)
+       transactions=transactionsPerDay.slice(-10)
   
   } 
+  console.log(transactions)
   const data = {
     labels: transactions.map(transaction=>{
       return transaction._id

@@ -82,7 +82,7 @@ const UserDetails = () => {
           },
         }
       );
-      console.log(transactions.data.transactionsDetails);
+      // console.log(transactions.data.transactionsDetails);
       setTransactions(transactions.data.transactionsDetails)
     }catch(err){
       console.log(err)
