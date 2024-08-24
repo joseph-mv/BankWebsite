@@ -25,7 +25,7 @@ const Transactions = () => {
 
     fetchTransactions();
   }, [baseUrl, token]);
-console.log(transactions)
+// console.log(transactions)
   const columns = useMemo(
     () => [
       {

@@ -27,6 +27,7 @@
  
   .edit-user{
     text-align: center;
+    
   }
   .edit-user form {
     display: flex;
@@ -43,6 +44,9 @@
     margin-right: 10%;
     
 
+  }
+  .edit-user form label span{
+    min-width: fit-content;
   }
   
   .edit-user form input {
@@ -63,6 +67,7 @@
     cursor: pointer;
     width: 80%;
     margin-left: 10%;
+    min-width:  fit-content;
   }
   
   .edit-user form button[type="button"] {
@@ -155,4 +160,10 @@ float: left;
 .transaction-amount.debit {
   color: red;
 }
-  
+@media (max-width: 700px){
+  .user-details-container {
+    grid-template-columns: 1fr;
+   
+  }
+ 
+}

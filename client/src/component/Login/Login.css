@@ -1,9 +1,11 @@
 /* Login.css */
 
 .loginContainer {
+  position: relative;
   display: flex;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: #f4f4f4;
+ max-width: 100vw;
 }
 
 .interactiveSection {

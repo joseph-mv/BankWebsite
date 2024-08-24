@@ -133,7 +133,7 @@ fetchTransaction()
               <input type="text" name="name" defaultValue={userDetails.name} />
             </label>
             <label>
-            <span> Mobile Number:</span> 
+            <span> Mobile No:</span> 
             
               <input type="number" name="mobileNumber" defaultValue={userDetails.mobileNumber} required/>
             </label>

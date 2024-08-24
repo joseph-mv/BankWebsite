@@ -9,7 +9,7 @@ const ChartUser = () => {
     const {usersPerDay}=useContext(MyContext)
     var user=[]
     if(usersPerDay.length){
-         user=usersPerDay.reverse().slice(-10)
+         user=usersPerDay.slice(-10)
     
     }
     const data = {

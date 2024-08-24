@@ -12,18 +12,22 @@ const Header = () => {
     setToken(""); 
     navigate("/login");
   };
-
+ 
   const toggleMenu = () => {
+   
     if (!isMenuOpen) {
+      
       document.body.classList.add('fixed-body');
+     
   } else {
       document.body.classList.remove('fixed-body');
   }
-    setIsMenuOpen(!isMenuOpen);
+  setIsMenuOpen(prevState => !prevState);
   };
 
+  
   return (
-    <header className="header">
+    <div className="header">
       <div className="container">
         <div className="logo" onClick={() => navigate("/")}>
           <img height="50px" src="../../logo.png" alt="XYZ Bank Logo" />
@@ -56,7 +60,7 @@ const Header = () => {
           )}
         </nav>
       </div>
-    </header>
+    </div>
   );
 };
 
