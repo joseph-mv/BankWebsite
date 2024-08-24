@@ -6,9 +6,11 @@ import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import UserDetails from './pages/UserDetails'
 import Transaction from './pages/Transaction';
+import ScrollToTop from '../src/components/ScrollToTop/ScrollToTop'
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/dash-board" element={<Dashboard/>}/>

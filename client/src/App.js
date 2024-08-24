@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import DashBoard from './pages/DashBoard';
 import React from 'react';
+import ScrollToTop from '../src/component/ScrollToTop/ScrollToTop'
 
 import './App.css'
 function App() {
@@ -13,7 +14,7 @@ function App() {
   return (
     <div>
        <Router>
-      
+      <ScrollToTop/>
       <Routes>
 
         <Route path="/" element={<Home />} />

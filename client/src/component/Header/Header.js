@@ -24,7 +24,9 @@ const Header = () => {
   }
   setIsMenuOpen(prevState => !prevState);
   };
-
+  useEffect(() => {
+    document.body.classList.remove('fixed-body');
+  }, [])
   
   return (
     <div className="header">
